@@ -50,6 +50,11 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.logout = (req, res, next) => {
+  res.clearCookie('jwt').send({ message: 'Осуществлен выход из системы!' })
+    .catch(next);
+};
+
 module.exports.getAuthorizedUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new NotFoundError(ERROR_MESSAGES.USER_BY_ID_NOT_FOUND))
@@ -69,7 +74,7 @@ module.exports.updateUserInfo = (req, res, next) => {
     },
   ).orFail(new NotFoundError(ERROR_MESSAGES.USER_BY_ID_NOT_FOUND))
     .then((updatedUser) => res.send(
-      { email: updatedUser.email, name: updatedUser.email },
+      { email: updatedUser.email, name: updatedUser.name },
     ))
     .catch(next);
 };

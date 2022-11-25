@@ -17,12 +17,4 @@ router.post('/signin', celebrate({
   }),
 }), login);
 
-// узнать, как удалять токен из кук
-// router.post('/signout', celebrate({
-//   body: Joi.object().keys({
-//     email: Joi.string().required().email(),
-//     password: Joi.string().required(),
-//   }),
-// }), logout);
-
 module.exports = router;

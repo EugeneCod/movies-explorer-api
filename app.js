@@ -13,8 +13,8 @@ const { ERROR_MESSAGES } = require('./utils/constants');
 const NotFoundError = require('./errors/not-found');
 
 const {
-  PORT = 3000,
-  MONGO_URL = 'mongodb://localhost:27017/mestodb',
+  PORT = 3001,
+  MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb',
 } = process.env;
 
 const app = express();
