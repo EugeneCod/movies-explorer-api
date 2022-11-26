@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const console = require('console');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 require('dotenv').config();
 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/CORS');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/error-handler');
@@ -13,7 +13,7 @@ const { ERROR_MESSAGES } = require('./utils/constants');
 const NotFoundError = require('./errors/not-found');
 
 const {
-  PORT = 3001,
+  PORT = 3000,
   MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb',
 } = process.env;
 
