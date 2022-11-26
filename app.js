@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const console = require('console');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -14,10 +15,18 @@ const NotFoundError = require('./errors/not-found');
 
 const {
   PORT = 3000,
-  MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb',
+  MONGO_URL = 'mongodb://localhost:27017/moviesdb',
 } = process.env;
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 150, // Limit each IP to 150 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
 const app = express();
+app.use(limiter);
 app.use(cors);
 
 app.use(cookieParser());
