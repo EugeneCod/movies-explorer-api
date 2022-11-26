@@ -1,7 +1,7 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'https://mesto.ekg.nomoredomains.icu',
-  'http://mesto.ekg.nomoredomains.icu',
+  'http://diplom.ekg.nomoredomains.club',
+  'https://diplom.ekg.nomoredomains.club',
   'http://localhost:3000',
 ];
 
