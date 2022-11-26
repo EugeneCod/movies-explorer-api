@@ -32,13 +32,13 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovieById = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  Movie.findById(req.params._id)
     .orFail(new NotFoundError(ERROR_MESSAGES.MOVIE_BY_ID_NOT_FOUND))
     .then((movie) => {
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError(ERROR_MESSAGES.REJECT_MOVIE_DELETION);
       }
-      return Movie.findByIdAndRemove(req.params.movieId)
+      return Movie.findByIdAndRemove(req.params._id)
         .then((removedMovie) => res.send(removedMovie));
     })
     .catch(next);
