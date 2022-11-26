@@ -4,6 +4,7 @@ const console = require('console');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 require('dotenv').config();
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -27,6 +28,7 @@ const limiter = rateLimit({
 
 const app = express();
 app.use(limiter);
+app.use(helmet);
 app.use(cors);
 
 app.use(cookieParser());
