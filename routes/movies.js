@@ -23,8 +23,7 @@ router.post('/', celebrate({
     thumbnail: Joi.string().required().custom(checkUrlValidity),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    // movieId тип данных?
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 
