@@ -68,8 +68,7 @@ module.exports.updateUserInfo = (req, res, next) => {
     req.user._id,
     { email, name },
     {
-      new: false,
-      // new: true,
+      new: true,
       runValidators: true,
     },
   ).orFail(new NotFoundError(ERROR_MESSAGES.USER_BY_ID_NOT_FOUND))
