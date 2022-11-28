@@ -27,9 +27,8 @@ const userSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-// eslint-disable-next-line func-names
-userSchema.statics.findUserByCredentials = function (email, password) {
-  return this.findOne({ email }).select('+password')
+userSchema.statics.findUserByCredentials = (email, password) => {
+  this.findOne({ email }).select('+password')
     .orFail(new UnauthorizedError(ERROR_MESSAGES.INCORRECT_AUTHORIZATION_DATA))
     .then((user) => bcrypt.compare(password, user.password)
       .then((matched) => {
