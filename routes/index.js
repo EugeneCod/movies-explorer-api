@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { login, createUser, logout } = require('../controllers/users');
+const checkAuth = require('../middlewares/auth');
+const NotFoundError = require('../errors/not-found');
+const { ERROR_MESSAGES } = require('../utils/constants');
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -18,5 +21,13 @@ router.post('/signin', celebrate({
 }), login);
 
 router.get('/signout', logout);
+
+router.use(checkAuth);
+router.use('/users', require('./users'));
+router.use('/movies', require('./movies'));
+
+router.use('*', (req, res, next) => {
+  next(new NotFoundError(ERROR_MESSAGES.INVALID_ADDRESS_OR_METHOD));
+});
 
 module.exports = router;
