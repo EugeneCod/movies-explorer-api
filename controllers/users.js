@@ -75,5 +75,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     .then((updatedUser) => res.send(
       { email: updatedUser.email, name: updatedUser.name },
     ))
-    .catch(next);
+    .catch((err) => {
+      if (err.code === 11000) {
+        return next(new ConflictError(ERROR_MESSAGES.CONFLICT_WITH_THE_USER_BASE));
+      }
+      return next(err);
+    });
 };

@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const console = require('console');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
+// const rateLimit = require('express-rate-limit');
+// const helmet = require('helmet');
 require('dotenv').config();
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -19,16 +19,16 @@ const {
   MONGO_URL = 'mongodb://localhost:27017/moviesdb',
 } = process.env;
 
-const limiter = rateLimit({
+/* const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 150, // Limit each IP to 150 requests per `window` (here, per 15 minutes)
+  max: 1000, // Limit each IP to 150 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
+}); */
 
 const app = express();
-app.use(limiter);
-app.use(helmet());
+// app.use(limiter);
+// app.use(helmet());
 app.use(cors);
 
 app.use(cookieParser());
@@ -37,12 +37,6 @@ app.use(express.json());
 mongoose.connect(MONGO_URL);
 
 app.use(requestLogger); // логгер запросов
-
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
 
 app.use('/', require('./routes/auth'));
 
