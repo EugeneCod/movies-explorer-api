@@ -11,20 +11,21 @@ const rateLimit = require('./middlewares/rate-limit');
 const cors = require('./middlewares/CORS');
 const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
+const { DEV_MONGO_URL, DEV_PORT } = require('./utils/constants');
 
 const {
-  PORT = 3000,
-  MONGO_URL = 'mongodb://localhost:27017/moviesdb',
+  PORT = DEV_PORT,
+  MONGO_URL = DEV_MONGO_URL,
 } = process.env;
 
 const app = express();
-app.use(requestLogger);
 app.use(cors);
+mongoose.connect(MONGO_URL);
+app.use(requestLogger);
 app.use(rateLimit);
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
-mongoose.connect(MONGO_URL);
 app.use('/', router);
 app.use(errorLogger);
 app.use(errors());

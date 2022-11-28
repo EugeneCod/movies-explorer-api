@@ -23,7 +23,12 @@ const ERROR_MESSAGES = {
   INVALID_ADDRESS_OR_METHOD: 'Некорректный адрес или метод запроса',
 };
 
+const DEV_MONGO_URL = 'mongodb://localhost:27017/moviesdb';
+const DEV_PORT = 3000;
+
 module.exports = {
   STATUS_CODES,
   ERROR_MESSAGES,
+  DEV_MONGO_URL,
+  DEV_PORT,
 };
