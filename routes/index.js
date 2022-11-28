@@ -20,9 +20,8 @@ router.post('/signin', celebrate({
   }),
 }), login);
 
-router.get('/signout', logout);
-
 router.use(checkAuth);
+router.get('/signout', logout);
 router.use('/users', require('./users'));
 router.use('/movies', require('./movies'));
 

@@ -1,7 +1,12 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { STATUS_CODES, ERROR_MESSAGES } = require('../utils/constants');
+const {
+  STATUS_CODES,
+  ERROR_MESSAGES,
+  RESPONSE_MESSAGES,
+  DEV_DATA,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -37,7 +42,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'SECRET-KEY',
+        NODE_ENV === 'production' ? JWT_SECRET : DEV_DATA.SECRET_KEY,
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {
@@ -45,13 +50,13 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       })
-        .send({ message: 'Авторизация прошла успешно!' });
+        .send({ message: RESPONSE_MESSAGES.AUTHORIZATION_WAS_SUCCESSFUL });
     })
     .catch(next);
 };
 
 module.exports.logout = (req, res, next) => {
-  res.clearCookie('jwt').send({ message: 'Осуществлен выход из системы!' })
+  res.clearCookie('jwt').send({ message: RESPONSE_MESSAGES.LOGGED_OUT_OF_THE_SYSTEM })
     .catch(next);
 };
 

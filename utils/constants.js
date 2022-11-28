@@ -23,12 +23,20 @@ const ERROR_MESSAGES = {
   INVALID_ADDRESS_OR_METHOD: 'Некорректный адрес или метод запроса',
 };
 
-const DEV_MONGO_URL = 'mongodb://localhost:27017/moviesdb';
-const DEV_PORT = 3000;
+const RESPONSE_MESSAGES = {
+  AUTHORIZATION_WAS_SUCCESSFUL: 'Авторизация прошла успешно!',
+  LOGGED_OUT_OF_THE_SYSTEM: 'Осуществлен выход из системы!',
+};
+
+const DEV_DATA = {
+  MONGO_URL: 'mongodb://localhost:27017/moviesdb',
+  PORT: 3000,
+  SECRET_KEY: 'SECRET-KEY',
+};
 
 module.exports = {
   STATUS_CODES,
   ERROR_MESSAGES,
-  DEV_MONGO_URL,
-  DEV_PORT,
+  RESPONSE_MESSAGES,
+  DEV_DATA,
 };

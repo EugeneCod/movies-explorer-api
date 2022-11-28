@@ -11,11 +11,11 @@ const rateLimit = require('./middlewares/rate-limit');
 const cors = require('./middlewares/CORS');
 const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
-const { DEV_MONGO_URL, DEV_PORT } = require('./utils/constants');
+const { DEV_DATA } = require('./utils/constants');
 
 const {
-  PORT = DEV_PORT,
-  MONGO_URL = DEV_MONGO_URL,
+  PORT = DEV_DATA.PORT,
+  MONGO_URL = DEV_DATA.MONGO_URL,
 } = process.env;
 
 const app = express();
