@@ -30,7 +30,7 @@ const RESPONSE_MESSAGES = {
 
 const DEV_DATA = {
   MONGO_URL: 'mongodb://localhost:27017/moviesdb',
-  PORT: 3000,
+  PORT: 3001,
   SECRET_KEY: 'SECRET-KEY',
 };
 
