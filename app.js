@@ -5,11 +5,11 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 require('dotenv').config();
-const cors = require('cors');
+// const cors = require('cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const rateLimit = require('./middlewares/rate-limit');
-// const cors = require('./middlewares/CORS');
+const cors = require('./middlewares/CORS');
 const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
 const { DEV_DATA } = require('./utils/constants');
@@ -20,17 +20,17 @@ const {
 } = process.env;
 
 const app = express();
-// app.use(cors);
-app.use(
-  cors({
-    credentials: true,
-    origin: [
-      'http://diplom.ekg.nomoredomains.club',
-      'https://diplom.ekg.nomoredomains.club',
-      'http://localhost:3000',
-    ],
-  }),
-);
+app.use(cors);
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: [
+//       'http://diplom.ekg.nomoredomains.club',
+//       'https://diplom.ekg.nomoredomains.club',
+//       'http://localhost:3000',
+//     ],
+//   }),
+// );
 mongoose.connect(MONGO_URL);
 app.use(requestLogger);
 app.use(rateLimit);
