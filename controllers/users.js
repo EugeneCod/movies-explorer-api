@@ -48,7 +48,8 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        sameSite: false,
+        sameSite: NODE_ENV === 'production' ? 'lax' : 'none',
+        secure: NODE_ENV === 'production',
       })
         .send({ message: RESPONSE_MESSAGES.AUTHORIZATION_WAS_SUCCESSFUL });
     })
